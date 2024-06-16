@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-clicked {
+            background-color: yellow !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Certificate Generator</h1>
+
+        <!-- Template Upload Form -->
+        <div class="mt-4">
+            <h2>Upload Template</h2>
+            <form method="post" enctype="multipart/form-data" action="/upload_template/" id="uploadTemplateForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="template_file">Template File (PNG/JPG):</label>
+                    <input type="file" name="template_file" id="template_file" class="form-control-file" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="uploadTemplateBtn">Upload Template</button>
+            </form>
+        </div>
+
+        <!-- Excel Upload Form -->
+        <div class="mt-4">
+            <h2>Upload Excel</h2>
+            <form method="post" enctype="multipart/form-data" action="/upload_excel/" id="uploadExcelForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="excel_file">Excel File (XLS/XLSX):</label>
+                    <input type="file" name="excel_file" id="excel_file" class="form-control-file" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="uploadExcelBtn">Upload Excel</button>
+            </form>
+        </div>
+
+        <!-- Generate Certificates Form -->
+        <div class="mt-4">
+            <h2>Generate Certificates</h2>
+            <form method="post" action="/generate_certificates/" id="generateCertificatesForm">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success" id="generateCertificatesBtn">Generate Certificates</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#uploadTemplateForm').submit(function () {
+                $('#uploadTemplateBtn').addClass('btn-clicked');
+            });
+            $('#uploadExcelForm').submit(function () {
+                $('#uploadExcelBtn').addClass('btn-clicked');
+            });
+            $('#generateCertificatesForm').submit(function () {
+                $('#generateCertificatesBtn').addClass('btn-clicked');
+            });
+        });
+    </script>
+</body>
+
+</html>
